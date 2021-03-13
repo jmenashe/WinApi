@@ -69,4 +69,30 @@ namespace WinApi.Kernel32
 
         public ulong FileSize => ((ulong) this.FileSizeHigh << 32) | this.FileSizeLow;
     }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MemoryInformation
+    {
+        public IntPtr BaseAddress;
+        public IntPtr AllocationBase;
+        public MemoryProtectionFlag AllocationProtect;
+        public IntPtr RegionSize;
+        public MemoryState State;
+        public MemoryProtectionFlag Protect;
+        public MemoryType Type;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MemoryInformation_64
+    {
+        public ulong BaseAddress;
+        public ulong AllocationBase;
+        public MemoryProtectionFlag AllocationProtect;
+        public int __alignment1;
+        public ulong RegionSize;
+        public MemoryState State;
+        public MemoryProtectionFlag Protect;
+        public MemoryType Type;
+        public int __alignment2;
+    }
 }

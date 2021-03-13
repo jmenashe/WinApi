@@ -88,6 +88,18 @@ namespace WinApi.Kernel32
         [DllImport(LibraryName, ExactSpelling = true, EntryPoint = "RtlSecureZeroMemory")]
         public static extern void SecureZeroMemory(IntPtr dest, IntPtr size);
 
+        // https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualqueryex
+        [DllImport(LibraryName, ExactSpelling = true)]
+        public static extern int VirtualQueryEx(IntPtr hProcess, IntPtr lpAddress, out MemoryInformation lpBuffer, int dwLength);
+
+        //// https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualqueryex
+        //[DllImport(LibraryName, ExactSpelling = true)]
+        //public static extern void VirtualQueryEx(IntPtr hProcess, IntPtr lpAddress, out MemoryInformation_32 lpBuffer, int dwLength);
+
+        //// https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualqueryex
+        //[DllImport(LibraryName, ExactSpelling = true)]
+        //public static extern void VirtualQueryEx(IntPtr hProcess, IntPtr lpAddress, out MemoryInformation_64 lpBuffer, int dwLength);
+
         #endregion
 
         #region Handle and Object Functions 
@@ -162,7 +174,16 @@ namespace WinApi.Kernel32
         public static extern uint GetVersion();
 
         [DllImport(LibraryName, ExactSpelling = true)]
-        public static extern bool IsWow64Process(IntPtr hProcess, out int isWow64Process);
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool IsWow64Process(IntPtr hProcess, [MarshalAs(UnmanagedType.Bool)] out bool wow64Process);
+
+        [DllImport(LibraryName, ExactSpelling = true)]
+        public static extern uint ReadProcessMemory(
+          IntPtr hProcess,
+          IntPtr lpBaseAddress,
+          [Out] byte[] lpBuffer,
+          int dwSize,
+          out IntPtr lpNumberOfBytesRead);
 
         [DllImport(LibraryName, ExactSpelling = true)]
         public static extern void GetNativeSystemInfo(out SystemInfo lpSystemInfo);
@@ -188,6 +209,9 @@ namespace WinApi.Kernel32
 
         [DllImport(LibraryName, ExactSpelling = true)]
         public static extern uint GetCurrentProcessorNumber();
+
+        [DllImport(LibraryName, ExactSpelling = true)]
+        public static extern IntPtr OpenProcess(ProcessAccessRight dwDesiredAccess, int bInheritHandle, uint dwProcessId);
 
         #endregion
 

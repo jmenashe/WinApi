@@ -113,8 +113,10 @@ namespace WinApi.User32
         public static extern bool AdjustWindowRect([In] [Out] ref Rectangle lpRect, WindowStyles dwStyle, bool hasMenu);
 
         [DllImport(LibraryName, ExactSpelling = true)]
-        public static extern bool AdjustWindowRectEx([In] [Out] ref Rectangle lpRect, WindowStyles dwStyle, bool hasMenu,
-            WindowExStyles dwExStyle);
+        public static extern bool AdjustWindowRectEx([In] [Out] ref Rectangle lpRect, WindowStyles dwStyle, bool hasMenu, WindowExStyles dwExStyle);
+
+        [DllImport(LibraryName, ExactSpelling = true)]
+        static extern IntPtr AdjustWindowRectExForDpi([In] [Out] ref Rectangle lpRect, WindowStyles dwStyle, bool hasMenu, WindowExStyles dwExStyle, uint dpi);
 
         [DllImport(LibraryName, ExactSpelling = true)]
         public static extern bool CopyRect(out Rectangle lprcDst, [In] ref Rectangle lprcSrc);
@@ -242,6 +244,9 @@ namespace WinApi.User32
 
         [DllImport(LibraryName, CharSet = Properties.BuildCharSet)]
         public static extern bool GetMonitorInfo(IntPtr hMonitor, ref MonitorInfo lpmi);
+
+        [DllImport(LibraryName, ExactSpelling = true)]
+        static public extern bool SetProcessDPIAware();
 
         #region Keyboard, Mouse & Input Method Functions
 
@@ -548,6 +553,9 @@ namespace WinApi.User32
 
         [DllImport(LibraryName, ExactSpelling = true)]
         public static extern bool CloseWindow(IntPtr hwnd);
+
+        [DllImport(LibraryName, ExactSpelling = true)]
+        private static extern uint GetDpiForWindow(IntPtr hwnd);
 
         #endregion
 

@@ -537,4 +537,57 @@ namespace WinApi.Kernel32
         /// </summary>
         FILE_ATTRIBUTE_VIRTUAL = 0x10000
     }
+
+    
+    [Flags]
+    /// <summary>
+    /// Documentation: https://docs.microsoft.com/en-us/windows/win32/memory/memory-protection-constants
+    /// </summary>
+    public enum MemoryProtectionFlag : uint
+    {
+        PAGE_NOACCESS = 0x01,
+        PAGE_READONLY = 0x02,
+        PAGE_READWRITE = 0x04,
+        PAGE_WRITECOPY = 0x08,
+        PAGE_EXECUTE = 0x10,
+        PAGE_EXECUTE_READ = 0x20,
+        PAGE_EXECUTE_READWRITE = 0x40,
+        PAGE_EXECUTE_WRITECOPY = 0x80,
+        PAGE_GUARD = 0x100,
+        PAGE_NOCACHE = 0x200,
+        PAGE_WRITECOMBINE = 0x400,
+        PAGE_TARGETS_INVALID =   0x40000000,
+        PAGE_TARGETS_NO_UPDATE = 0x40000000
+    }
+
+    public enum MemoryState : uint
+    {
+        MEM_COMMIT = 0x1000,
+        MEM_FREE = 0x10000,
+        MEM_RESERVE = 0x2000
+    }    
+    
+    public enum MemoryType : uint
+    {
+        MEM_IMAGE = 0x1000000,
+        MEM_MAPPED = 0x40000,
+        MEM_PRIVATE = 0x20000
+    }
+
+    [Flags]
+    public enum ProcessAccessRight : uint
+    {
+        PROCESS_TERMINATE = 1,
+        PROCESS_CREATE_THREAD = 2,
+        PROCESS_VM_OPERATION = 8,
+        PROCESS_VM_READ = 16, // 0x00000010
+        PROCESS_VM_WRITE = 32, // 0x00000020
+        PROCESS_DUP_HANDLE = 64, // 0x00000040
+        PROCESS_CREATE_PROCESS = 128, // 0x00000080
+        PROCESS_SET_QUOTA = 256, // 0x00000100
+        PROCESS_SET_INFORMATION = 512, // 0x00000200
+        PROCESS_QUERY_INFORMATION = 1024, // 0x00000400
+        PROCESS_SUSPEND_RESUME = 2048, // 0x00000800
+        SYNCHRONIZE = 1048576, // 0x00100000
+    }
 }
